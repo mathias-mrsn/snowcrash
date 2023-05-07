@@ -2,7 +2,7 @@
 
 ---
 
-For this level we have in the `level03` repository a file named `level03`. This file is a ELF44 file. The first thing I do is `cat` this file to have so useful informations.
+For this level we have in the `level03` repository a file named `level03`. This file is a ELF file. The first thing I do is `cat` this file to have so useful informations.
 
 ```shell
 $ hexdump -C level03
