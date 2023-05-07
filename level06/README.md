@@ -66,7 +66,7 @@ $ cat level06.php
 ?>
 ```
 
-This php script have vulnerability with the /e modifier. This means that when preg_replace is called the secoond parameter will be replaced and executed.
+This php script have vulnerability with the /e modifier. This means that when `preg_replace` is called the secoond parameter will be replaced and executed.
 
 For example :
 ```
