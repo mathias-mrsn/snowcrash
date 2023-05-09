@@ -2,7 +2,7 @@
 
 ---
 
-In this level I have only one executable file I will instantly see what it does with `gdb`.
+In this level, I have only one executable file. I will instantly see what it does with `gdb`.
 
 ```shell
 disas main
@@ -34,7 +34,7 @@ x/s 0x80486ef
 0x80486ef:	 "boe]!ai0FB@.:|L6l@A?>qJ}I"
 ```
 
-Perfect this value seems to be a flag ! I will force the program to pass the condition at the line 14.
+Perfect, this value seems to be a flag! I will force the program to pass the condition at line 14.
 
 ```shell
 (gdb) b *0x08048595
@@ -51,4 +51,4 @@ your token is 2A31L79asukciNyi8uppkEuSx
 0xb7e454d3 in __libc_start_main () from /lib/i386-linux-gnu/libc.so.6
 ```
 
-To understand what I did, the `$eax` is the register used to store the return value of the functions, so here I force the program to think that `getuid()` has returned `4242`.
+To understand what I did, `$eax` is the register used to store the return value of functions. Here, I forced the program to think that `getuid()` returned `4242.

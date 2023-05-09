@@ -2,7 +2,7 @@
 
 ---
 
-First we need to show every files created by the user `flag00`
+Firstly, we need to display all the files created by the user `flag00`.
 
 ```shell
 $ find / -user flag00
@@ -16,11 +16,11 @@ cat /usr/sbin/john
 cdiiddwpgswtgt
 ```
 
-This key does not work so I enter the string it on Google. The first website
-`
-Chiffre de César - Déchiffrer, Coder, Décoder en Ligne
-`
-so I use this website to decrypt the string and here is the results.
+This key does not work, so I searched for it on Google. The first website that appears is 
+
+`Caesar Cipher - Decrypt, Encode, Decode online`
+
+So I used this website to decrypt the string, and here are the results.
 
 ```
 [...]
@@ -28,4 +28,4 @@ so I use this website to decrypt the string and here is the results.
 [...]
 ```
 
-We can now use this key to log to the `flag00` user.
+We can now use this key to log in as the `flag00` user."\

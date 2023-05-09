@@ -316,12 +316,12 @@ Dump of assembler code for function main:
    0x08048ecb <+1413>:	ret
 ```
 
-I see two interesting functions :
+I see two interesting functions:
 
-1. `ltrace` is here to protect the usage of gdb. But we can like previous force the return value of the function.
-2. `getuid` is here to return the uid of the user who asked to get the flag.
+1. `ltrace` is here to prevent the usage of `gdb`. But we can, as previously, force the return value of the function.
+2. `getuid` is here to return the `uid` of the user who requested to get the flag.
 
-So maybe that disable `ltrace` and change `getuid` return value by the `flag14` uid could give us the flag.
+So maybe disabling `ltrace` and changing the `getuid` return value to the `flag14` `uid` could give us the flag.
 
 ```shell
 $ cat /etc/passwd
@@ -349,6 +349,6 @@ Breakpoint 2, 0x8048b0a in main ()
 (gdb) n
 Single stepping until exit from function main,
 which has no line number information.
-Check flag.Here is your token : 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ
+Check flag. Here is your token: 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ
 0xb7e454d3 in __libc_start_main () from /lib/i386-linux-gnu/libc.so.6
 ```

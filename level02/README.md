@@ -7,20 +7,20 @@ $ ls
 $ level02.pcap
 ```
 
-We have a .pcap file. This file extention is used by network record so we can use `wireshark` to see the contents.
+We have a .pcap file. This file extension is used for network recording, so we can use `wireshark` to view its contents.
 
-When I opne the file with wireshark, I see a list of TCP requests. Looking request by request I see that at the line 42 there is a request with as data `Password:`
+When I opened the file with Wireshark, I saw a list of TCP requests. Going through them one by one, I noticed that on line 42 there was a request with the data `Password:`.
 
-Then at line 91 a message : `Log in incorrect ww wbugs login:`.
+Then on line 91, a message appeared: `Log in incorrect ww wbugs login:`.
 
-So I looked every requests from `59.233.235.218` and concatenated their data.
+So I examined every request from `59.233.235.218` and concatenated their data.
 
-Here is the result : `ft_wandr\7f\7f\7fNDRel\7fL0L\0d`
+Here is the result: `ft_wandr\7f\7f\7fNDRel\7fL0L\0d`
 
-`\7f` is `DEL` in ascii so if I delete the letters we have this result : `ft_waNDReL0L`
+`\7f` represents `DEL` in ASCII, so if I remove these characters, we have this result: `ft_waNDReL0L`.
 
 ---
 
-*Source :*
+*Source:*
 
 *https://www.reviversoft.com/en/file-extensions/pcap#:~:text=Since%20Wireshark%20can%20be%20accessed,Packet%20Square%20%2D%20Capedit%20and%20Ethereal.*

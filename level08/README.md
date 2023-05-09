@@ -12,7 +12,7 @@ total 16
 -rw-------  1 flag08 flag08    26 Mar  5  2016 token
 ```
 
-I dont have access to token but I can execute level08. So I use gdb to understand what level08 does.
+I dont have access to token but I can execute level08. I use gdb to understand what level08 does.
 
 ```shell
 $ gdb -q level08
@@ -101,21 +101,22 @@ Dump of assembler code for function main:
    0x080486a3 <+335>:	ret
 End of assembler dump.
 ```
+Corrected version:
 
-The source code of this executable must look something like this :
+The source code of this executable should look something like this:
 
 ```c
 int main (int ac, char **av)
 {
     if (ac == 1) {
-        printf("./level08 [file to read]");  
+        printf("./level08 [file to read]");
         exit(1);
     }
     if (strstr(av[1], "token")) {
-        printf("You may not access \'%s\', av[1]")
+        printf("You may not access '%s'", av[1]);
         exit(1);
     }
-    int fd = open(av[1]);
+    int fd = open(av[1], O_RDONLY);
     if (fd == -1) {
         err();
     } else {
@@ -131,9 +132,9 @@ int main (int ac, char **av)
 }
 ```
 
-This function does launch the exec command so I cannot run `getflag` through it. But I think the flag is in `token`.
+This function launches the `exec` command, so I cannot run `getflag` through it. However, I think the flag is in `token`.
 
-I cannot run `level08 token` because the code check the string `token` instead I will create symlink to run token with another name.
+I cannot run `level08 token` because the code checks the string `token`. Instead, I will create a symlink to run `token` with another name.
 
 ```shell
 $ ln -s /home/user/level08/token /tmp/file
@@ -142,5 +143,5 @@ quif5eloekouj29ke0vouxean
 $ su flag08
 Password: quif5eloekouj29ke0vouxean
 $ getflag
-Check flag.Here is your token : 25749xKZ8L7DkSCwJkT9dyv6f
+Check flag. Here is your token: 25749xKZ8L7DkSCwJkT9dyv6f
 ```

